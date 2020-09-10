@@ -1,0 +1,91 @@
+{
+  "name": "gql",
+  "version": "1.0.0",
+  "description": "A GraphQL schema manipulation tool.",
+  "main": "index.js",
+  "bin": {
+    "qgl": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mprivat/gql.git"
+  },
+  "keywords": [
+    "graphql",
+    "cli"
+  ],
+  "author": "Michael Privat",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mprivat/gql/issues"
+  },
+  "homepage": "https://github.com/mprivat/gql#readme",
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "header-max-length": [
+        0,
+        "always",
+        100
+      ]
+    }
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/.terraform/",
+      "/undefined/"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogFile": "docs/CHANGELOG.md"
+        }
+      ],
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "docs/CHANGELOG.md",
+            "package.json"
+          ],
+          "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
+    ]
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/release-notes-generator": "^9.0.1",
+    "jest-junit": "^10.0.0",
+    "semantic-release": "^17.1.1",
+    "terraunit": "^1.7.1",
+    "jest": "^26.0.1",
+    "eslint-config-availity": "^5.0.0",
+    "@commitlint/cli": "^9.0.1",
+    "@commitlint/config-conventional": "^9.0.1",
+    "husky": "^4.0.10",
+    "lint-staged": "^10.0.10"
+  },
+  "dependencies": {
+    "commander": "^6.1.0"
+  }
+}
