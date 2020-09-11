@@ -7,6 +7,7 @@
     "qgl": "./index.js"
   },
   "scripts": {
+    "grammar": "nearleyc graphql_grammar.ne -o graphql_grammar.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -70,21 +71,23 @@
     ]
   },
   "devDependencies": {
+    "@commitlint/cli": "^9.0.1",
+    "@commitlint/config-conventional": "^9.0.1",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/commit-analyzer": "^8.0.1",
     "@semantic-release/git": "^9.0.0",
     "@semantic-release/release-notes-generator": "^9.0.1",
-    "jest-junit": "^10.0.0",
-    "semantic-release": "^17.1.1",
-    "terraunit": "^1.7.1",
-    "jest": "^26.0.1",
+    "eslint": "^7.8.1",
     "eslint-config-availity": "^5.0.0",
-    "@commitlint/cli": "^9.0.1",
-    "@commitlint/config-conventional": "^9.0.1",
     "husky": "^4.0.10",
-    "lint-staged": "^10.0.10"
+    "jest": "^26.0.1",
+    "jest-junit": "^10.0.0",
+    "lint-staged": "^10.0.10",
+    "semantic-release": "^17.1.1",
+    "terraunit": "^1.7.1"
   },
   "dependencies": {
-    "commander": "^6.1.0"
+    "commander": "^6.1.0",
+    "nearley": "^2.19.6"
   }
 }
