@@ -9,3 +9,31 @@ type X implements A & B @something @other(A: true, B: "b", C: 3.14) {
   other(xyz: String! = "abc" @test(x: 1), "This is some field" ooo: Date): Atype
 }
 
+scalar Date
+
+interface NamedEntity {
+  name: String
+}
+
+union SearchResult = Photo | Person
+
+enum Direction {
+  NORTH
+  """
+  This is the east, obviously
+  """
+  EAST
+  "The south is here" SOUTH
+  WEST
+}
+
+input Point2D {
+  x: Float
+  y: Float
+}
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
