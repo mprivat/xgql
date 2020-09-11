@@ -22,7 +22,7 @@ let lexer = moo.compile({
     kimplements: "implements",
     ktrue: "true",
     kfalse: "false",
-    variable_name: {
+    name: {
         match: /[a-zA-Z_][a-zA-Z_0-9]*/
     },
     number_literal: {
@@ -44,55 +44,47 @@ let lexer = moo.compile({
 
 @lexer lexer
 
-main -> _ml definitions _ml {% d => d[1] %}
+main -> _ml Definitions _ml {% d => d[1] %}
         
-definitions -> definition _ml definitions {% d => d[2].concat([d[0]]) %}
+Definitions -> definition _ml Definitions {% d => d[2].concat([d[0]]) %}
              | definition {% d => [d[0]] %}
 
-definition -> description:? type_system_definition
-            {%
-                d => {
-                    if(d[0]) {
-                        d[1].description = d[0]
-                    }
-                    return {
-                        "objectTypeDefinition": d[1]
-                    }
-                }
-            %}
+definition -> TypeSystemDefinition {% d => d[0] %}
 
-type_system_definition -> type_definition {% d => d[0] %}
+TypeSystemDefinition -> TypeDefinition {% d => d[0] %}
 
-type_definition -> object_type_definition {% d => d[0] %}
+TypeDefinition -> ObjectTypeDefinition {% d => d[0] %}
 
-object_type_definition -> %ktype _ml type_name implements_interfaces:? directives:? fields_definition
+ObjectTypeDefinition -> Description:? %ktype _ml TypeName ImplementsInterfaces:? Directives:? FieldsDefinition
          {%
              d => {
                  r = {
-                    "name": d[2],
-                    "fields": d[5]
+                    "type": "ObjectTypeDefinition",
+                    "name": d[3],
+                    "fields": d[6]
                  }
 
-                 if(d[3]) r.implements = d[3]
-                 if(d[4]) r.directives = d[4]
+                 if(d[0]) r.description = d[0]
+                 if(d[4]) r.implements = d[4]
+                 if(d[5]) r.directives = d[5]
 
                  return r;
              }
          %}
 
-type_name -> %variable_name _ml {% d => d[0].value %}
+TypeName -> %name _ml {% d => d[0].value %}
 
-implements_interfaces -> %kimplements _ml list_of_interfaces {% d => d[2] %}
+ImplementsInterfaces -> %kimplements _ml Interfaces {% d => d[2] %}
 
-list_of_interfaces -> type_name %and _ml list_of_interfaces {% d => [d[0]].concat(d[3]) %}
-                    | type_name {% d => [d[0]] %}
+Interfaces -> TypeName %and _ml Interfaces {% d => [d[0]].concat(d[3]) %}
+            | TypeName {% d => [d[0]] %}
 
-fields_definition -> %lbrace _ml list_of_fields:? %rbrace {% d => d[2] %}
+FieldsDefinition -> %lbrace _ml Fields:? %rbrace {% d => d[2] %}
 
-list_of_fields -> field list_of_fields {% d => [d[0]].concat(d[1]) %}
-                  | field {% d => [d[0]] %}
+Fields -> Field Fields {% d => [d[0]].concat(d[1]) %}
+        | Field {% d => [d[0]] %}
 
-field -> description:? %variable_name _ml arguments_definition:? %colon _ml type
+Field -> Description:? %name _ml ArgumentsDefinition:? %colon _ml Type
         {%
             d => {
                 const r = {
@@ -105,7 +97,7 @@ field -> description:? %variable_name _ml arguments_definition:? %colon _ml type
             }
         %}
 
-type -> type_name mandatory:?
+Type -> TypeName Mandatory:?
         {%
             d => {
                 return {
@@ -115,12 +107,12 @@ type -> type_name mandatory:?
             }
         %}
 
-mandatory -> %exclamation _ml
+Mandatory -> %exclamation _ml
 
-directives -> directive directives {% d => [d[0]].concat(d[1]) %}
-            | directive {% d => [d[0]] %}
+Directives -> Directive Directives {% d => [d[0]].concat(d[1]) %}
+            | Directive {% d => [d[0]] %}
 
-directive -> %at %variable_name _ml arguments:?
+Directive -> %at %name _ml Arguments:?
              {%
                 d => {
                     const r = {
@@ -131,12 +123,12 @@ directive -> %at %variable_name _ml arguments:?
                 }
              %}
 
-arguments -> %lparen _ml list_of_arguments:? %rparen _ml {% d => d[2] ? d[2] : null %}
+Arguments -> %lparen _ml ListOfArguments:? %rparen _ml {% d => d[2] ? d[2] : null %}
 
-list_of_arguments -> argument list_of_arguments {% d => [d[0]].concat(d[1]) %}
-                   | argument {% d => [d[0]] %}
+ListOfArguments -> Argument ListOfArguments {% d => [d[0]].concat(d[1]) %}
+                   | Argument {% d => [d[0]] %}
 
-argument -> %variable_name _ml %colon _ml value _ml
+Argument -> %name _ml %colon _ml Value _ml
             {%
                 d => {
                     return {
@@ -146,12 +138,12 @@ argument -> %variable_name _ml %colon _ml value _ml
                 }
             %}
 
-arguments_definition -> %lparen _ml input_value_definition:? %rparen _ml {% d => d[2] ? d[2] : null %}
+ArgumentsDefinition -> %lparen _ml InputValueDefinition:? %rparen _ml {% d => d[2] ? d[2] : null %}
 
-input_value_definition -> argument_definition input_value_definition {% d => [d[0]].concat(d[1]) %}
-                        | argument_definition {% d => [d[0]] %}
+InputValueDefinition -> ArgumentDefinition InputValueDefinition {% d => [d[0]].concat(d[1]) %}
+                        | ArgumentDefinition {% d => [d[0]] %}
 
-argument_definition -> description:? %variable_name _ml %colon _ml type default_value:? directives:?
+ArgumentDefinition -> Description:? %name _ml %colon _ml Type DefaultValue:? Directives:?
                        {%
                             d => {
                                 const r = {
@@ -165,9 +157,9 @@ argument_definition -> description:? %variable_name _ml %colon _ml type default_
                             }
                        %}
 
-default_value -> %equals _ml value _ml {% d => d[2] %}
+DefaultValue -> %equals _ml Value _ml {% d => d[2] %}
 
-value -> %number_literal {% d => d[0].value %}
+Value -> %number_literal {% d => d[0].value %}
        | %string_literal {% d => d[0].value %}
        | %ktrue {% d => true %}
        | %kfalse {% d => false %}
@@ -182,7 +174,7 @@ __ -> %ws:+
 
 _ -> %ws:*
 
-description -> comment description {% d => d[0] + '\n' + d[1] %}
+Description -> comment Description {% d => d[0] + '\n' + d[1] %}
              | comment _ml {% d => d[0] %}
 
 comment -> %pound_comment {% d => d[0] %}
