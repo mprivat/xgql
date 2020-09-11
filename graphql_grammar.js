@@ -25,15 +25,26 @@ let lexer = moo.states({
         kenum: "enum",
         kinput: "input",
         kimplements: "implements",
+        kdirective: "directive",
+        kon: "on",
         lbrace: { match: "{", push: 'block' },
-        name: {
-            match: /[a-zA-Z_][a-zA-Z_0-9]*/,
-        },
         at: "@",
         lparen: { match: "(", push: 'block' },
         or: "|",
         and: "&",
-        equals: "="
+        equals: "=",
+        type_system_directive_location: [
+            'SCHEMA', 'SCALAR', 'OBJECT', 'FIELD_DEFINITION',
+            'ARGUMENT_DEFINITION', 'INTERFACE', 'UNION', 'ENUM',
+            'ENUM_VALUE', 'INPUT_OBJECT', 'INPUT_FIELD_DEFINITION'
+        ],
+        executable_directive_location: [
+            'QUERY', 'MUTATION', 'SUBSCRIPTION', 'FIELD',
+            'FRAGMENT_DEFINITION', 'FRAGMENT_SPREAD', 'INLINE_FRAGMENT'
+        ],
+        name: {
+            match: /[a-zA-Z_][a-zA-Z_0-9]*/,
+        }
     },
     block: {
         ws: /[ \t,]+/,
@@ -84,6 +95,29 @@ var grammar = {
     {"name": "Definition", "symbols": ["TypeSystemDefinition"], "postprocess": d => d[0]},
     {"name": "TypeSystemDefinition", "symbols": ["TypeDefinition"], "postprocess": d => d[0]},
     {"name": "TypeSystemDefinition", "symbols": ["SchemaDefinition"], "postprocess": d => d[0]},
+    {"name": "TypeSystemDefinition", "symbols": ["DirectiveDefinition"], "postprocess": d => d[0]},
+    {"name": "DirectiveDefinition$ebnf$1", "symbols": ["Description"], "postprocess": id},
+    {"name": "DirectiveDefinition$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
+    {"name": "DirectiveDefinition$ebnf$2", "symbols": ["ArgumentsDefinition"], "postprocess": id},
+    {"name": "DirectiveDefinition$ebnf$2", "symbols": [], "postprocess": function(d) {return null;}},
+    {"name": "DirectiveDefinition", "symbols": ["DirectiveDefinition$ebnf$1", (lexer.has("kdirective") ? {type: "kdirective"} : kdirective), "_ml", (lexer.has("at") ? {type: "at"} : at), "Name", "DirectiveDefinition$ebnf$2", (lexer.has("kon") ? {type: "kon"} : kon), "_ml", "DirectiveLocations"], "postprocess": 
+        d => {
+            const r = {
+                "type": "Directive",
+                "name": d[4]
+            }
+        
+            if(d[0]) r.description = d[0]
+            if(d[5]) r.argumentsDefinition = d[5]
+            if(d[8]) r.on = d[8]
+        
+            return r
+        }
+                                },
+    {"name": "DirectiveLocations", "symbols": ["DirectiveLocation", (lexer.has("or") ? {type: "or"} : or), "_ml", "DirectiveLocations"], "postprocess": d => [d[0]].concat(d[3])},
+    {"name": "DirectiveLocations", "symbols": ["DirectiveLocation"], "postprocess": d => [d[0]]},
+    {"name": "DirectiveLocation", "symbols": [(lexer.has("executable_directive_location") ? {type: "executable_directive_location"} : executable_directive_location), "_ml"], "postprocess": d => d[0].value},
+    {"name": "DirectiveLocation", "symbols": [(lexer.has("type_system_directive_location") ? {type: "type_system_directive_location"} : type_system_directive_location), "_ml"], "postprocess": d => d[0].value},
     {"name": "SchemaDefinition$ebnf$1", "symbols": ["Directives"], "postprocess": id},
     {"name": "SchemaDefinition$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
     {"name": "SchemaDefinition", "symbols": [(lexer.has("kschema") ? {type: "kschema"} : kschema), "_ml", "SchemaDefinition$ebnf$1", (lexer.has("lbrace") ? {type: "lbrace"} : lbrace), "_ml", "RootOperationTypeDefinitions", (lexer.has("rbrace") ? {type: "rbrace"} : rbrace), "_ml"], "postprocess": 

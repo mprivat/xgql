@@ -27,6 +27,11 @@ enum Direction {
   WEST
 }
 
+directive @cacheControl(
+  maxAge: Int
+  scope: CacheControlScope
+) on FIELD_DEFINITION | OBJECT | INTERFACE
+
 input Point2D {
   x: Float
   y: Float

@@ -24,15 +24,26 @@ let lexer = moo.states({
         kenum: "enum",
         kinput: "input",
         kimplements: "implements",
+        kdirective: "directive",
+        kon: "on",
         lbrace: { match: "{", push: 'block' },
-        name: {
-            match: /[a-zA-Z_][a-zA-Z_0-9]*/,
-        },
         at: "@",
         lparen: { match: "(", push: 'block' },
         or: "|",
         and: "&",
-        equals: "="
+        equals: "=",
+        type_system_directive_location: [
+            'SCHEMA', 'SCALAR', 'OBJECT', 'FIELD_DEFINITION',
+            'ARGUMENT_DEFINITION', 'INTERFACE', 'UNION', 'ENUM',
+            'ENUM_VALUE', 'INPUT_OBJECT', 'INPUT_FIELD_DEFINITION'
+        ],
+        executable_directive_location: [
+            'QUERY', 'MUTATION', 'SUBSCRIPTION', 'FIELD',
+            'FRAGMENT_DEFINITION', 'FRAGMENT_SPREAD', 'INLINE_FRAGMENT'
+        ],
+        name: {
+            match: /[a-zA-Z_][a-zA-Z_0-9]*/,
+        }
     },
     block: {
         ws: /[ \t,]+/,
@@ -88,6 +99,29 @@ Definition -> TypeSystemDefinition {% d => d[0] %}
 
 TypeSystemDefinition -> TypeDefinition {% d => d[0] %}
                       | SchemaDefinition {% d => d[0] %}
+                      | DirectiveDefinition {% d => d[0] %}
+
+DirectiveDefinition -> Description:? %kdirective _ml %at Name ArgumentsDefinition:? %kon _ml DirectiveLocations
+                        {%
+                            d => {
+                                const r = {
+                                    "type": "Directive",
+                                    "name": d[4]
+                                }
+
+                                if(d[0]) r.description = d[0]
+                                if(d[5]) r.argumentsDefinition = d[5]
+                                if(d[8]) r.on = d[8]
+
+                                return r
+                            }
+                        %}
+
+DirectiveLocations -> DirectiveLocation %or _ml DirectiveLocations  {% d => [d[0]].concat(d[3]) %}
+                    | DirectiveLocation  {% d => [d[0]] %}
+
+DirectiveLocation -> %executable_directive_location _ml     {% d => d[0].value %}
+                   | %type_system_directive_location _ml    {% d => d[0].value %}
 
 SchemaDefinition -> %kschema _ml Directives:? %lbrace _ml RootOperationTypeDefinitions %rbrace _ml
                     {%
