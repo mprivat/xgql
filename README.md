@@ -1,5 +1,5 @@
-# gql
+# graphqlx
 
-A GraphQL schema manipulation tool.
+A GraphQL schema manipulation tool and extensions.
 
 
