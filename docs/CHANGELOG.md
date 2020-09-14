@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/mprivat/xgql/compare/v1.1.1...v1.2.0) (2020-09-14)
+
+
+### Features
+
+* auto-fill interface fields ([bb4d5a1](https://github.com/mprivat/xgql/commit/bb4d5a12bc867be676fe53b4bd32d4677c60874a))
+
 ## [1.1.1](https://github.com/mprivat/xgql/compare/v1.1.0...v1.1.1) (2020-09-14)
 
 
