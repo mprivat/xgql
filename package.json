@@ -70,7 +70,7 @@
       ]
     ]
   },
-  "dependencies": {
+  "devDependencies": {
     "@commitlint/cli": "^9.0.1",
     "@commitlint/config-conventional": "^9.0.1",
     "@semantic-release/changelog": "^5.0.1",
@@ -83,7 +83,9 @@
     "jest": "^26.0.1",
     "jest-junit": "^10.0.0",
     "lint-staged": "^10.0.10",
-    "semantic-release": "^17.1.1",
+    "semantic-release": "^17.1.1"
+  },
+  "dependencies": {
     "colors": "^1.4.0",
     "commander": "^6.1.0",
     "nearley": "^2.19.6"
