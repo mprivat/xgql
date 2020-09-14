@@ -8,7 +8,7 @@ Run `graphqlx --help` to get general help or `graphqlx <command> --help` to get 
 
 ## Merge multiple GraphQL schemas
 
-It's often useful if you need sanity, to break down large schemas into multiple files. The `merge` command merges the files back together into a single file:
+It's often useful if you need sanity, to break down large schemas into multiple files. The `merge` command merges the files back together into a single schema. The following command outputs the merged schema to stdout:
 
 ```bash
 graphqlx merge tests/resources/schema1.graphql tests/resources/schema2.graphql
