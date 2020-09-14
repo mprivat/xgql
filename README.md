@@ -20,6 +20,131 @@ Some graphql vendors want comments formatted a certain way (I'm looking at you A
 xgql merge --style appsync tests/resources/schema1.graphql tests/resources/schema2.graphql
 ```
 
+### Example
+
+**schema1.graphql**
+
+```graphql
+type Person {
+  id: ID!
+  name: String!
+  age: Int!
+  dob: MyDate!
+}
+
+type Query {
+  allPersons(last: Int): [Person!]!
+}
+
+type Mutation {
+  createPerson(name: String!, age: Int!): Person!
+}
+
+type Subscription {
+  newPerson: Person!
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+```
+
+**schema2.graphql**
+
+```graphql
+"""
+Custom definition of a date
+"""
+scalar MyDate
+
+type Post {
+  id: ID!
+  title: String!
+  author: Person!
+}
+
+input PostInput {
+  title: String!
+  author: Person!
+}
+
+type Query {
+  # Lists all posts
+  allPosts(title: String!): [Post!]!
+}
+
+type Mutation {
+  """
+  Creates a new post
+  """
+  createPost(post: PostInput!): Post!
+}
+```
+
+Results in:
+
+```graphql
+schema {
+    query: Query
+    mutation: Mutation
+    subscription: Subscription
+}
+
+type Person {
+    id: ID!
+    name: String!
+    age: Int!
+    dob: MyDate!
+}
+
+input PostInput {
+    title: String!
+    author: Person!
+}
+
+type Post {
+    id: ID!
+    title: String!
+    author: Person!
+}
+
+"""
+Custom definition of a date
+"""
+scalar MyDate
+
+type Subscription {
+    newPerson: Person!
+}
+
+type Mutation {
+    createPerson(
+        name: String!
+        age: Int!
+    ): Person!
+    """
+    Creates a new post
+    """
+    createPost(
+        post: PostInput!
+    ): Post!
+}
+
+type Query {
+    allPersons(
+        last: Int
+    ): [Person!]!
+    """
+    Lists all posts
+    """
+    allPosts(
+        title: String!
+    ): [Post!]!
+}
+```
+
 ## Syntax check a GraphQL schema
 
 The `syntax` command simply checks that the content of the file is well formatted. It does not try to check that any of the types are valid, etc...
