@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/mprivat/xgql/compare/v1.0.0...v1.1.0) (2020-09-14)
+
+
+### Features
+
+* renamed subcommands to line up with the lib name ([12353b6](https://github.com/mprivat/xgql/commit/12353b62702b00ea937b3a4e83518d455d653f4a))
+
 # 1.0.0 (2020-09-14)
 
 
