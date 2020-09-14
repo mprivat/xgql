@@ -15,9 +15,12 @@ graphqlx validate tests/resources/type.graphql tests/resources/type-invalid.grap
 will output something like:
 
 ```bash
-tests/resources/type.graphql: OK
-tests/resources/type-invalid.graphql: ERROR
+- tests/resources/type.graphql: OK
+- tests/resources/type-invalid.graphql: ERROR
 invalid syntax at line 3 col 25:
 
     variable(): Date! What's this doing here?
 ```
+
+The `validate` command will exit with code 1 is any error was found, 0 otherwise. This can be useful for CI.
+
