@@ -1,9 +1,9 @@
 const fs = require("fs").promises;
 const nearley = require("nearley");
 const graphqlGrammar = require("../graphql_grammar");
-const toSDL = require("../json-to-sql");
+const toSDL = require("../json-to-sdl");
 
-test("I can reverse JSON back to SQL", async () => {
+test("I can reverse JSON back to SDL", async () => {
   const json = JSON.parse(
     await fs.readFile("tests/resources/schema00.json", "utf8")
   );
@@ -49,7 +49,7 @@ test("I can reverse JSON back to SQL", async () => {
   ).toBe(true);
 });
 
-test("I can reverse JSON back to SQL with appsync comments", async () => {
+test("I can reverse JSON back to SDL with appsync comments", async () => {
   const json = JSON.parse(
     await fs.readFile("tests/resources/schema00.json", "utf8")
   );

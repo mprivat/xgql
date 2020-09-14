@@ -1,0 +1,27 @@
+"""
+Custom definition of a date
+"""
+scalar MyDate
+
+type Post {
+  id: ID!
+  title: String!
+  author: Person!
+}
+
+input PostInput {
+  title: String!
+  author: Person!
+}
+
+type Query {
+  # Lists all posts
+  allPosts(title: String!): [Post!]!
+}
+
+type Mutation {
+  """
+  Creates a new post
+  """
+  createPost(post: PostInput!): Post!
+}

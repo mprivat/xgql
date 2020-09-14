@@ -1,0 +1,24 @@
+type Person {
+  id: ID!
+  name: String!
+  age: Int!
+  dob: MyDate!
+}
+
+type Query {
+  allPersons(last: Int): [Person!]!
+}
+
+type Mutation {
+  createPerson(name: String!, age: Int!): Person!
+}
+
+type Subscription {
+  newPerson: Person!
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}

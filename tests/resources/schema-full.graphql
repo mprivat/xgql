@@ -1,0 +1,36 @@
+type Person {
+  id: ID!
+  name: String!
+  age: Int!
+  dob: MyDate!
+}
+
+"""
+Custom definition of a date
+"""
+scalar MyDate
+
+type Post {
+  id: ID!
+  title: String!
+  author: Person!
+  posts: [Post!]!
+}
+
+type Query {
+  allPersons(last: Int): [Person!]!
+}
+
+type Mutation {
+  createPerson(name: String!, age: Int!): Person!
+}
+
+type Subscription {
+  newPerson: Person!
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
