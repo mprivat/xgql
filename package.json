@@ -1,10 +1,10 @@
 {
-  "name": "graphqlx",
+  "name": "xgql",
   "version": "1.0.0",
   "description": "A GraphQL schema manipulation tool.",
   "main": "index.js",
   "bin": {
-    "graphqlx": "./index.js"
+    "xgql": "./index.js"
   },
   "scripts": {
     "grammar": "nearleyc graphql_grammar.ne -o graphql_grammar.js",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mprivat/graphqlx.git"
+    "url": "git+https://github.com/mprivat/xgql.git"
   },
   "keywords": [
     "graphql",
@@ -21,9 +21,9 @@
   "author": "Michael Privat",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mprivat/graphqlx/issues"
+    "url": "https://github.com/mprivat/xgql/issues"
   },
-  "homepage": "https://github.com/mprivat/graphqlx#readme",
+  "homepage": "https://github.com/mprivat/xgql#readme",
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
