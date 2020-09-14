@@ -103,7 +103,7 @@ var grammar = {
     {"name": "DirectiveDefinition", "symbols": ["DirectiveDefinition$ebnf$1", (lexer.has("kdirective") ? {type: "kdirective"} : kdirective), "_ml", (lexer.has("at") ? {type: "at"} : at), "Name", "DirectiveDefinition$ebnf$2", (lexer.has("kon") ? {type: "kon"} : kon), "_ml", "DirectiveLocations"], "postprocess": 
         d => {
             const r = {
-                "type": "Directive",
+                "type": "DirectiveDefinition",
                 "name": d[4]
             }
         
@@ -386,7 +386,7 @@ var grammar = {
     {"name": "ArgumentDefinition", "symbols": ["ArgumentDefinition$ebnf$1", (lexer.has("name") ? {type: "name"} : name), "_ml", (lexer.has("colon") ? {type: "colon"} : colon), "_ml", "Type", "ArgumentDefinition$ebnf$2", "ArgumentDefinition$ebnf$3"], "postprocess": 
         d => {
             const r = {
-                "value": d[1].value,
+                "name": d[1].value,
                 "type": d[5]
             }
             if(d[0]) r.description = d[0]

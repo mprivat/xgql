@@ -3,6 +3,7 @@
 const nearley = require("nearley");
 const graphqlGrammar = require("./graphql_grammar");
 const fs = require("fs").promises;
+const toSDL = require("./json-to-sql");
 
 const program = require("commander");
 
@@ -20,8 +21,14 @@ async function run(args) {
     nearley.Grammar.fromCompiled(graphqlGrammar)
   );
   const parsed = parser.feed(schema);
-  console.log(JSON.stringify(parsed.results[0], 0, 2));
+
+  const json_representation = parsed.results[0];
+
+  console.log(JSON.stringify(json_representation, 0, 2));
   if (parsed.results.length > 1) {
     console.log(`The grammar is ambiguous: ${parsed.results.length} solutions`);
   }
+
+  const sql = toSDL(json_representation, 0);
+  console.log(sql);
 }

@@ -105,7 +105,7 @@ DirectiveDefinition -> Description:? %kdirective _ml %at Name ArgumentsDefinitio
                         {%
                             d => {
                                 const r = {
-                                    "type": "Directive",
+                                    "type": "DirectiveDefinition",
                                     "name": d[4]
                                 }
 
@@ -372,7 +372,7 @@ ArgumentDefinition -> Description:? %name _ml %colon _ml Type DefaultValue:? Dir
                        {%
                             d => {
                                 const r = {
-                                    "value": d[1].value,
+                                    "name": d[1].value,
                                     "type": d[5]
                                 }
                                 if(d[0]) r.description = d[0]

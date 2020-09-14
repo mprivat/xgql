@@ -7,9 +7,13 @@ type X implements A & B @something @other(A: true, B: "b", C: 3.14) {
   "other is cool"
 
   other(xyz: String! = "abc" @test(x: 1), "This is some field" ooo: Date): Atype
+  lastThing: [[String!]!]
 }
 
-scalar Date
+"""
+It's cool
+"""
+scalar Date @somedirective
 
 interface NamedEntity {
   name: String
@@ -27,9 +31,13 @@ enum Direction {
   WEST
 }
 
+"""
+Some directive
+on multiple lines
+"""
 directive @cacheControl(
-  maxAge: Int
-  scope: CacheControlScope
+  maxAge: Int = 3 @somestuff(a:1, b:2)
+  "Da scope" scope: CacheControlScope
 ) on FIELD_DEFINITION | OBJECT | INTERFACE
 
 input Point2D {
@@ -37,7 +45,10 @@ input Point2D {
   y: Float
 }
 
-schema {
+schema @someDirective(
+  a: 12
+  bleh: "abcd"
+) {
     query: Query
     mutation: Mutation
 }
