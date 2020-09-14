@@ -1,0 +1,16 @@
+[
+  {
+    "description": "just because",
+    "directives": [{ "name": "somedirective1" }],
+    "fields": [
+      {
+        "directives": [{ "name": "adirective" }],
+        "name": "name",
+        "type": { "name": "String", "nullable": true }
+      }
+    ],
+    "name": "NamedEntity",
+    "type": "InterfaceTypeDefinition"
+  }
+]
+

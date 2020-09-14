@@ -1,0 +1,9 @@
+[
+  {
+    "description": "Some description",
+    "members": ["Photo", "Person"],
+    "name": "SearchResult",
+    "type": "UnionTypeDefinition"
+  }
+]
+

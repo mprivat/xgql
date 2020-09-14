@@ -1,0 +1,11 @@
+"""
+This is a first thing
+and here is another
+"""
+type X implements A & B @something @other(A: true, B: "b", C: 3.14) {
+  variable(): Date!
+  "other is cool"
+
+  other(xyz: String! = "abc" @test(x: 1), "This is some field" ooo: Date): Atype
+  lastThing: [[String!]!]
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "description": "Some test description",
+    "name": "Direction",
+    "type": "EnumTypeDefinition",
+    "values": [
+      { "value": "NORTH" },
+      { "description": "This is the east, obviously", "value": "EAST" },
+      {
+        "description": "The south is here",
+        "directives": [{ "name": "thedirective" }],
+        "value": "SOUTH"
+      },
+      { "value": "WEST" }
+    ]
+  }
+]
+

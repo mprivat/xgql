@@ -1,0 +1,11 @@
+"""
+Some directive
+on multiple lines
+"""
+directive @cacheControl(
+    maxAge: Int = 3 @somestuff(a: 1, b: 2)
+    """
+    Da scope
+    """
+    scope: CacheControlScope
+) on FIELD_DEFINITION | OBJECT | INTERFACE

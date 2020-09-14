@@ -1,0 +1,18 @@
+[
+  {
+    "directives": [
+      {
+        "arguments": [
+          { "name": "a", "value": 12 },
+          { "name": "bleh", "value": "abcd" }
+        ],
+        "name": "someDirective"
+      }
+    ],
+    "operations": [
+      { "operation": "query", "type": "Query" },
+      { "operation": "mutation", "type": "Mutation" }
+    ],
+    "type": "SchemaDefinition"
+  }
+]

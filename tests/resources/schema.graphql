@@ -1,0 +1,4 @@
+schema @someDirective(a: 12, bleh: "abcd") {
+  query: Query
+  mutation: Mutation
+}

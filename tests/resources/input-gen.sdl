@@ -1,0 +1,11 @@
+"""
+A description
+"""
+input Point2D {
+    x: Float = 3.56 @somestuff
+    """
+    An argument description
+    """
+    y: Float
+}
+

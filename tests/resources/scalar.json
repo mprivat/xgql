@@ -1,0 +1,9 @@
+[
+  { "name": "Something", "type": "ScalarTypeDefinition" },
+  {
+    "description": "It's cool",
+    "directives": [{ "name": "somedirective" }],
+    "name": "Date",
+    "type": "ScalarTypeDefinition"
+  }
+]

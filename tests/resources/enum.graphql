@@ -1,0 +1,11 @@
+# Some test description
+enum Direction {
+  NORTH
+  """
+  This is the east, obviously
+  """
+  EAST
+  "The south is here"
+  SOUTH @thedirective
+  WEST
+}

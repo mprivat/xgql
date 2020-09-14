@@ -1,0 +1,20 @@
+[
+  {
+    "description": "A description",
+    "fields": [
+      {
+        "defaultValue": 3.56,
+        "directives": [{ "name": "somestuff" }],
+        "name": "x",
+        "type": { "name": "Float", "nullable": true }
+      },
+      {
+        "description": "An argument description",
+        "name": "y",
+        "type": { "name": "Float", "nullable": true }
+      }
+    ],
+    "name": "Point2D",
+    "type": "InputObjectTypeDefinition"
+  }
+]

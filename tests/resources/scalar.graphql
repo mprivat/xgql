@@ -1,0 +1,5 @@
+"""
+It's cool
+"""
+scalar Date @somedirective
+scalar Something

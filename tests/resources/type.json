@@ -1,0 +1,89 @@
+[
+  {
+    "type": "ObjectTypeDefinition",
+    "name": "X",
+    "description": "This is a first thing\nand here is another",
+    "implements": ["A", "B"],
+    "directives": [
+      {
+        "name": "something"
+      },
+      {
+        "name": "other",
+        "arguments": [
+          {
+            "name": "A",
+            "value": true
+          },
+          {
+            "name": "B",
+            "value": "b"
+          },
+          {
+            "name": "C",
+            "value": 3.14
+          }
+        ]
+      }
+    ],
+    "fields": [
+      {
+        "name": "variable",
+        "type": {
+          "name": "Date",
+          "nullable": false
+        }
+      },
+      {
+        "name": "other",
+        "type": {
+          "name": "Atype",
+          "nullable": true
+        },
+        "description": "other is cool",
+        "argumentsDefinition": [
+          {
+            "name": "xyz",
+            "type": {
+              "name": "String",
+              "nullable": false
+            },
+            "defaultValue": "abc",
+            "directives": [
+              {
+                "name": "test",
+                "arguments": [
+                  {
+                    "name": "x",
+                    "value": 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "ooo",
+            "type": {
+              "name": "Date",
+              "nullable": true
+            },
+            "description": "This is some field"
+          }
+        ]
+      },
+      {
+        "name": "lastThing",
+        "type": {
+          "listOf": {
+            "listOf": {
+              "name": "String",
+              "nullable": false
+            },
+            "nullable": false
+          },
+          "nullable": true
+        }
+      }
+    ]
+  }
+]

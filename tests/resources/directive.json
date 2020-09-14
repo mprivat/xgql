@@ -1,0 +1,29 @@
+[
+  {
+    "argumentsDefinition": [
+      {
+        "defaultValue": 3,
+        "directives": [
+          {
+            "arguments": [
+              { "name": "a", "value": 1 },
+              { "name": "b", "value": 2 }
+            ],
+            "name": "somestuff"
+          }
+        ],
+        "name": "maxAge",
+        "type": { "name": "Int", "nullable": true }
+      },
+      {
+        "description": "Da scope",
+        "name": "scope",
+        "type": { "name": "CacheControlScope", "nullable": true }
+      }
+    ],
+    "description": "Some directive\non multiple lines",
+    "name": "cacheControl",
+    "on": ["FIELD_DEFINITION", "OBJECT", "INTERFACE"],
+    "type": "DirectiveDefinition"
+  }
+]
