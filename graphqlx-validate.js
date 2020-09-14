@@ -3,7 +3,7 @@
 const nearley = require("nearley");
 const graphqlGrammar = require("./graphql_grammar");
 const fs = require("fs").promises;
-const toSDL = require("./json-to-sql");
+require("colors");
 
 const program = require("commander");
 
@@ -12,23 +12,27 @@ program
   .action(function () {
     run(process.argv.slice(2));
   })
+  .usage("[options] <path> [morePaths ...]")
   .parse(process.argv);
 
 async function run(args) {
-  const schema = await fs.readFile(args[0], "utf8");
+  for (let filename of args) {
+    const parser = new nearley.Parser(
+      nearley.Grammar.fromCompiled(graphqlGrammar)
+    );
 
-  const parser = new nearley.Parser(
-    nearley.Grammar.fromCompiled(graphqlGrammar)
-  );
-  const parsed = parser.feed(schema);
-
-  const json_representation = parsed.results[0];
-
-  console.log(JSON.stringify(json_representation, 0, 2));
-  if (parsed.results.length > 1) {
-    console.log(`The grammar is ambiguous: ${parsed.results.length} solutions`);
+    try {
+      const schema = await fs.readFile(filename, "utf8");
+      parser.feed(schema);
+      console.log(`${filename}: ${"OK".green}`);
+    } catch (err) {
+      let message = err.message;
+      const idx = message.lastIndexOf("Unexpected input");
+      if (idx >= 0) {
+        message = message.substring(0, idx);
+      }
+      console.log(`${filename}: ${"ERROR".red}`);
+      console.log(message);
+    }
   }
-
-  const sql = toSDL(json_representation, 0);
-  console.log(sql);
 }

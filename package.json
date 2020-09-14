@@ -87,6 +87,7 @@
     "terraunit": "^1.7.1"
   },
   "dependencies": {
+    "colors": "^1.4.0",
     "commander": "^6.1.0",
     "nearley": "^2.19.6"
   }
