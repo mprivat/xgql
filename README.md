@@ -16,7 +16,7 @@ graphqlx syntax tests/resources/type.graphql tests/resources/type-invalid.graphq
 
 will output something like:
 
-```bash
+```
 - tests/resources/type.graphql: OK
 - tests/resources/type-invalid.graphql: ERROR
 invalid syntax at line 3 col 25:
