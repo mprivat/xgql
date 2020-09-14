@@ -145,7 +145,40 @@ type Query {
 }
 ```
 
-## Syntax check a GraphQL schema
+### The --fill option
+
+If the --fill option is set, `xgql` will automatically add missing fields from interfaces inherited by a type. Example:
+
+```graphql
+interface Person {
+  id: ID!
+  first_name: String
+  last_name: String!
+}
+
+type Employee implements Person {
+  employee_id: String!
+}
+```
+
+becomes:
+
+```graphql
+interface Person {
+    id: ID!
+    first_name: String
+    last_name: String!
+}
+
+type Employee implements Person {
+    employee_id: String!
+    id: ID!
+    first_name: String
+    last_name: String!
+}
+```
+
+## Syntax [check](check) a GraphQL schema
 
 The `syntax` command simply checks that the content of the file is well formatted. It does not try to check that any of the types are valid, etc...
 

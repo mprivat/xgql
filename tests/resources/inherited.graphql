@@ -1,0 +1,9 @@
+interface Person {
+  id: ID!
+  first_name: String
+  last_name: String!
+}
+
+type Employee implements Person {
+  employee_id: String!
+}

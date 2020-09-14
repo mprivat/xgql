@@ -19,6 +19,7 @@ program
     "The output style (default|appsync)",
     /^(default|appsync)$/i
   )
+  .option("-f --fill", "Fill in missing fields from inherited interfaces", 0)
   .action(function (args) {
     run(args);
   })
@@ -75,7 +76,7 @@ async function run(args) {
     }
   }
 
-  // Check that there are no colliding type names
+  // Check that there are no colliding names
   const names_registry = {};
   for (const filename of Object.keys(members)) {
     for (const definition of members[filename]) {
@@ -123,6 +124,8 @@ async function run(args) {
     merged.push(combinations[entry]);
   }
 
+  if (program.fill) fillInheritedFields(merged);
+
   let style = 0;
   switch (program.style) {
     case "appsync":
@@ -140,4 +143,37 @@ async function run(args) {
 function fail(message) {
   console.log(message);
   process.exit(1);
+}
+
+function fillInheritedFields(blocks) {
+  // Gather all the interfaces
+  const interfaces = {};
+  const types = [];
+  for (const entry of blocks) {
+    if (entry.type === "InterfaceTypeDefinition") {
+      interfaces[entry.name] = entry;
+    } else if (entry.type === "ObjectTypeDefinition") {
+      types.push(entry);
+    }
+  }
+
+  // Go through all the types
+  for (const type of types) {
+    if (type.implements) {
+      for (const interface of type.implements) {
+        const def = interfaces[interface];
+        if (!def)
+          fail(
+            `type ${type.name} implements ${interface} but that interface is unknown`
+          );
+        if (def.fields) {
+          if (!type.fields) type.fields = [];
+          for (const field of def.fields) {
+            if (!type.fields.find((f) => f.name === field.name))
+              type.fields.push(field);
+          }
+        }
+      }
+    }
+  }
 }
