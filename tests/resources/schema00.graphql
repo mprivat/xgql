@@ -15,8 +15,11 @@ It's cool
 """
 scalar Date @somedirective
 
-interface NamedEntity {
-  name: String
+"""
+just because
+"""
+interface NamedEntity @somedirective1 {
+  name: String @adirective
 }
 
 union SearchResult = Photo | Person
@@ -27,7 +30,7 @@ enum Direction {
   This is the east, obviously
   """
   EAST
-  "The south is here" SOUTH
+  "The south is here" SOUTH @thedirective
   WEST
 }
 
@@ -40,8 +43,14 @@ directive @cacheControl(
   "Da scope" scope: CacheControlScope
 ) on FIELD_DEFINITION | OBJECT | INTERFACE
 
+"""
+A description
+"""
 input Point2D {
-  x: Float
+  x: Float = 3.56 @somestuff
+  """
+  An argument description
+  """
   y: Float
 }
 

@@ -204,6 +204,7 @@ var grammar = {
                 "name": d[3]
              }
         
+             if(d[0]) r.description = d[0]
              if(d[4]) r.directives = d[4]
              if(d[5]) r.fields = d[5]
         

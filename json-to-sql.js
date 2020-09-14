@@ -14,15 +14,19 @@ function toSDL(obj, style) {
         printSchemaDefinition(buffer, block);
         break;
       case "InputObjectTypeDefinition":
+        printInputObjectTypeDefinition(buffer, block);
         break;
       case "DirectiveDefinition":
         printDirectiveDefinition(buffer, block);
         break;
       case "EnumTypeDefinition":
+        printEnumTypeDefinition(buffer, block);
         break;
       case "UnionTypeDefinition":
+        printUnionTypeDefinition(buffer, block);
         break;
       case "InterfaceTypeDefinition":
+        printInterfaceTypeDefinition(buffer, block);
         break;
       case "ScalarTypeDefinition":
         printScalarTypeDefinition(buffer, block);
@@ -182,6 +186,32 @@ function printObjectTypeDefinition(buffer, objectTypeDefinition) {
   println(buffer, "}\n");
 }
 
+function printInputObjectTypeDefinition(buffer, inputObjectTypeDefinition) {
+  if (inputObjectTypeDefinition.description) {
+    printDescription(buffer, inputObjectTypeDefinition.description, 0);
+  }
+  print(buffer, `input ${inputObjectTypeDefinition.name}`);
+  if (inputObjectTypeDefinition.implements) {
+    print(buffer, " implements");
+    for (let i in inputObjectTypeDefinition.implements) {
+      print(buffer, ` ${inputObjectTypeDefinition.implements[i]}`);
+      if (i < inputObjectTypeDefinition.implements.length - 1) {
+        print(buffer, " &");
+      }
+    }
+  }
+  if (inputObjectTypeDefinition.directives) {
+    for (let directive of inputObjectTypeDefinition.directives) {
+      printDirective(buffer, directive);
+    }
+  }
+  println(buffer, " {");
+  for (let field of inputObjectTypeDefinition.fields) {
+    printArgumentDefinition(buffer, field, 1);
+  }
+  println(buffer, "}\n");
+}
+
 function printFieldDefinition(buffer, fieldDefinition, indent) {
   if (fieldDefinition.description) {
     printDescription(buffer, fieldDefinition.description, indent);
@@ -202,6 +232,74 @@ function printFieldDefinition(buffer, fieldDefinition, indent) {
   }
   print(buffer, ": ");
   printType(buffer, fieldDefinition.type);
+  println(buffer, "");
+}
+
+function printInterfaceTypeDefinition(buffer, interfaceTypeDefinition) {
+  if (interfaceTypeDefinition.description) {
+    printDescription(buffer, interfaceTypeDefinition.description, 0);
+  }
+  print(buffer, `interface ${interfaceTypeDefinition.name}`);
+  if (interfaceTypeDefinition.directives) {
+    for (let directive of interfaceTypeDefinition.directives) {
+      printDirective(buffer, directive);
+    }
+  }
+  println(buffer, " {");
+  for (let field of interfaceTypeDefinition.fields) {
+    printFieldDefinition(buffer, field, 1);
+  }
+  println(buffer, "}\n");
+}
+
+function printUnionTypeDefinition(buffer, unionTypeDefinition) {
+  if (unionTypeDefinition.description) {
+    printDescription(buffer, unionTypeDefinition.description);
+  }
+  print(buffer, `union ${unionTypeDefinition.name}`);
+  if (unionTypeDefinition.directives) {
+    for (let directive of unionTypeDefinition.directives) {
+      printDirective(buffer, directive);
+    }
+  }
+  print(buffer, " =");
+  for (let i in unionTypeDefinition.members) {
+    print(buffer, ` ${unionTypeDefinition.members[i]}`);
+    if (i < unionTypeDefinition.members.length - 1) {
+      print(buffer, " |");
+    }
+  }
+  println(buffer, "\n");
+}
+
+function printEnumTypeDefinition(buffer, enumTypeDefinition) {
+  if (enumTypeDefinition.description) {
+    printDescription(buffer, enumTypeDefinition.description);
+  }
+  print(buffer, `enum ${enumTypeDefinition.name}`);
+  if (enumTypeDefinition.directives) {
+    for (let directive of enumTypeDefinition.directives) {
+      printDirective(buffer, directive);
+    }
+  }
+  println(buffer, " {");
+  for (let value of enumTypeDefinition.values) {
+    printEnumValue(buffer, value, 1);
+  }
+  println(buffer, "}\n");
+}
+
+function printEnumValue(buffer, value, indent) {
+  if (value.description) {
+    printDescription(buffer, value.description, indent);
+  }
+  tab(buffer, indent);
+  print(buffer, value.value);
+  if (value.directives) {
+    for (let directive of value.directives) {
+      printDirective(buffer, directive);
+    }
+  }
   println(buffer, "");
 }
 
