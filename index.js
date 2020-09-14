@@ -13,6 +13,6 @@ fs.readFile(`${appHome}/package.json`, "utf8", function (err, data) {
   program
     .version(package.version, "-v, --version")
     .description("A GraphQL schema manipulation tool.")
-    .command("validate", "validates the specified schema file(s)")
+    .command("syntax", "Syntax validation of the specified schema file(s)")
     .parse(process.args);
 });
