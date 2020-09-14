@@ -8,3 +8,9 @@ parserOptions:
 rules: {}
 globals:
   process: true
+overrides:
+  - files:
+    - "**/*.test.js"
+    env:
+      jest: true
+

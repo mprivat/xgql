@@ -9,7 +9,7 @@ let lexer = moo.states({
         ws: /[ \t,]+/,
         nl: { match: "\n", lineBreaks: true },
         pound_comment: {
-            match: /#[^\n]*/,
+            match: /(?:#[^\n]*[\n\r]*)+/,
             value: s => s.substring(1).trim()
         },
         ml_comment: {

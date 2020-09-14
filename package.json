@@ -8,7 +8,7 @@
   },
   "scripts": {
     "grammar": "nearleyc graphql_grammar.ne -o graphql_grammar.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",

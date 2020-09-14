@@ -109,7 +109,7 @@ function printArgumentDefinition(buffer, argumentDefinition, indent) {
   print(buffer, argumentDefinition.name + ": ");
   printType(buffer, argumentDefinition.type);
   if (argumentDefinition.defaultValue) {
-    print(buffer, " = " + argumentDefinition.defaultValue);
+    print(buffer, " = " + JSON.stringify(argumentDefinition.defaultValue));
   }
   if (argumentDefinition.directives) {
     for (let directive of argumentDefinition.directives) {
