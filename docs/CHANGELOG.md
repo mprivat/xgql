@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/mprivat/xgql/compare/v1.1.0...v1.1.1) (2020-09-14)
+
+
+### Bug Fixes
+
+* bumped release ([c7e574b](https://github.com/mprivat/xgql/commit/c7e574b51155d50f29b51663ec2fbf27e3076b8b))
+
 # [1.1.0](https://github.com/mprivat/xgql/compare/v1.0.0...v1.1.0) (2020-09-14)
 
 
