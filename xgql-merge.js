@@ -15,11 +15,15 @@ program
   )
   .arguments("[morePaths...]")
   .option(
-    "-s --style [style]",
+    "-s --style <style>",
     "The output style (default|appsync)",
     /^(default|appsync)$/i
   )
   .option("-f --fill", "Fill in missing fields from inherited interfaces", 0)
+  .option(
+    "-o --output <path>",
+    "Sends the resulting file to the given file instead of stdout"
+  )
   .action(function (args) {
     run(args);
   })
@@ -137,7 +141,11 @@ async function run(args) {
   }
 
   const result = toSDL(merged, style);
-  console.log(result);
+  if (program.output) {
+    await fs.writeFile(program.output, result, "utf8");
+  } else {
+    console.log(result);
+  }
 }
 
 function fail(message) {
