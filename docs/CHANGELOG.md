@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/mprivat/xgql/compare/v1.2.1...v1.3.0) (2020-09-15)
+
+
+### Bug Fixes
+
+* converted paths to absolute for uniqueness ([8b9859a](https://github.com/mprivat/xgql/commit/8b9859a26f64498933cdd232e5ec763ab43283ca))
+
+
+### Features
+
+* added output option for merge ([c4ba04f](https://github.com/mprivat/xgql/commit/c4ba04f8b59fa3fcb312844d8ffb952f2d2117ea))
+
 ## [1.2.1](https://github.com/mprivat/xgql/compare/v1.2.0...v1.2.1) (2020-09-15)
 
 
