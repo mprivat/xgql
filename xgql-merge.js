@@ -170,7 +170,7 @@ function fillInheritedFields(blocks) {
           if (!type.fields) type.fields = [];
           for (const field of def.fields) {
             if (!type.fields.find((f) => f.name === field.name))
-              type.fields.push(field);
+              type.fields.splice(0, 0, field);
           }
         }
       }
