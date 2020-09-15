@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/mprivat/xgql/compare/v1.2.0...v1.2.1) (2020-09-15)
+
+
+### Bug Fixes
+
+* insert inherited fields in the front ([150c77b](https://github.com/mprivat/xgql/commit/150c77bffffc555e60cf1cc3406665d51d438c89))
+
 # [1.2.0](https://github.com/mprivat/xgql/compare/v1.1.1...v1.2.0) (2020-09-14)
 
 
