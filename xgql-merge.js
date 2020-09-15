@@ -3,6 +3,7 @@
 const nearley = require("nearley");
 const graphqlGrammar = require("./graphql_grammar");
 const fs = require("fs").promises;
+const resolve = require("path").resolve;
 require("colors");
 
 const toSDL = require("./json-to-sdl");
@@ -34,6 +35,8 @@ async function run(args) {
     console.log("At least one file to validate is needed");
     process.exit(1);
   }
+
+  args = args.map((name) => resolve(name));
 
   const members = {};
 
