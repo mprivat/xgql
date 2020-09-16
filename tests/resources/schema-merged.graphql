@@ -1,0 +1,209 @@
+[
+  {
+    "type": "ObjectTypeDefinition",
+    "name": "Query",
+    "fields": [
+      {
+        "name": "allPersons",
+        "type": {
+          "listOf": {
+            "name": "Person",
+            "nullable": false
+          },
+          "nullable": false
+        },
+        "argumentsDefinition": [
+          {
+            "name": "last",
+            "type": {
+              "name": "Int",
+              "nullable": true
+            }
+          }
+        ]
+      },
+      {
+        "name": "allPosts",
+        "type": {
+          "listOf": {
+            "name": "Post",
+            "nullable": false
+          },
+          "nullable": false
+        },
+        "description": "Lists all posts",
+        "argumentsDefinition": [
+          {
+            "name": "title",
+            "type": {
+              "name": "String",
+              "nullable": false
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ObjectTypeDefinition",
+    "name": "Mutation",
+    "fields": [
+      {
+        "name": "createPerson",
+        "type": {
+          "name": "Person",
+          "nullable": false
+        },
+        "argumentsDefinition": [
+          {
+            "name": "name",
+            "type": {
+              "name": "String",
+              "nullable": false
+            }
+          },
+          {
+            "name": "age",
+            "type": {
+              "name": "Int",
+              "nullable": false
+            }
+          }
+        ]
+      },
+      {
+        "name": "createPost",
+        "type": {
+          "name": "Post",
+          "nullable": false
+        },
+        "description": "Creates a new post",
+        "argumentsDefinition": [
+          {
+            "name": "post",
+            "type": {
+              "name": "PostInput",
+              "nullable": false
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ObjectTypeDefinition",
+    "name": "Subscription",
+    "fields": [
+      {
+        "name": "newPerson",
+        "type": {
+          "name": "Person",
+          "nullable": false
+        }
+      }
+    ]
+  },
+  {
+    "type": "ScalarTypeDefinition",
+    "name": "MyDate",
+    "description": "Custom definition of a date"
+  },
+  {
+    "type": "ObjectTypeDefinition",
+    "name": "Post",
+    "fields": [
+      {
+        "name": "id",
+        "type": {
+          "name": "ID",
+          "nullable": false
+        }
+      },
+      {
+        "name": "title",
+        "type": {
+          "name": "String",
+          "nullable": false
+        }
+      },
+      {
+        "name": "author",
+        "type": {
+          "name": "Person",
+          "nullable": false
+        }
+      }
+    ]
+  },
+  {
+    "type": "InputObjectTypeDefinition",
+    "name": "PostInput",
+    "fields": [
+      {
+        "name": "title",
+        "type": {
+          "name": "String",
+          "nullable": false
+        }
+      },
+      {
+        "name": "author",
+        "type": {
+          "name": "Person",
+          "nullable": false
+        }
+      }
+    ]
+  },
+  {
+    "type": "ObjectTypeDefinition",
+    "name": "Person",
+    "fields": [
+      {
+        "name": "id",
+        "type": {
+          "name": "ID",
+          "nullable": false
+        }
+      },
+      {
+        "name": "name",
+        "type": {
+          "name": "String",
+          "nullable": false
+        }
+      },
+      {
+        "name": "age",
+        "type": {
+          "name": "Int",
+          "nullable": false
+        }
+      },
+      {
+        "name": "dob",
+        "type": {
+          "name": "MyDate",
+          "nullable": false
+        }
+      }
+    ]
+  },
+  {
+    "type": "SchemaDefinition",
+    "operations": [
+      {
+        "operation": "query",
+        "type": "Query"
+      },
+      {
+        "operation": "mutation",
+        "type": "Mutation"
+      },
+      {
+        "operation": "subscription",
+        "type": "Subscription"
+      }
+    ]
+  }
+]
