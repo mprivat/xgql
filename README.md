@@ -14,7 +14,7 @@ It's often useful if you need sanity, to break down large schemas into multiple 
 xgql merge tests/resources/schema1.graphql tests/resources/schema2.graphql
 ```
 
-Some graphql vendors want comments formatted a certain way (I'm looking at you AWS). So you can use the `--style` option to format comments appropriately.
+Some graphql vendors want comments formatted a certain way (I'm looking at you AWS). So you can use the `--style` option to format comments appropriately. AppSync in particular does not like enum values to have a desription so they will get scrubbed.
 
 ```bash
 xgql merge --style appsync tests/resources/schema1.graphql tests/resources/schema2.graphql
@@ -197,5 +197,13 @@ invalid syntax at line 3 col 25:
 ```
 
 The `syntax` command will exit with code 1 is any error was found, 0 otherwise. This can be useful for CI.
+
+## Introspection query
+
+The `introspect` command simulates running a basic introspection query against the schema. It produces a value instrospection JSON from the schema file.
+
+```bash
+xgql introspect schema.graphql
+```
 
 
