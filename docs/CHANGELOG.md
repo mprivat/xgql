@@ -1,3 +1,15 @@
+# [1.5.0](https://github.com/mprivat/xgql/compare/v1.4.0...v1.5.0) (2020-09-16)
+
+
+### Bug Fixes
+
+* muted enum values for appsync ([170f6bd](https://github.com/mprivat/xgql/commit/170f6bdc8405f0c0a32f611d1bded928959c163e))
+
+
+### Features
+
+* added basic introspection query ([2e880f3](https://github.com/mprivat/xgql/commit/2e880f3debbeaa5ff5034ab890a79f8415ee0928))
+
 # [1.4.0](https://github.com/mprivat/xgql/compare/v1.3.0...v1.4.0) (2020-09-16)
 
 
