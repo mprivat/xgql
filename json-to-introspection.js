@@ -104,6 +104,7 @@ function compose(schema, members, names, refs) {
     addScalars(s.types, members.scalars);
     addInputs(s.types, members.inputs, names, refs);
     addEnums(s.types, members.enums);
+    addUnions(s.types, members.unions, names);
   }
 
   return introspection;
@@ -230,6 +231,32 @@ function addEnums(list, enums) {
       };
     });
 
+    list.push(type);
+  }
+}
+
+function addUnions(list, unions, names) {
+  for (const t of unions) {
+    const type = {
+      name: t.name,
+      kind: "UNION",
+      description: t.description,
+      fields: null,
+      inputFields: null,
+      enumValues: null,
+      possibleTypes: null,
+      interfaces: null,
+    };
+    if (t.members) {
+      const kind = names[t.name];
+      t.possibleTypes = t.members.map((m) => {
+        return {
+          kind: kind ? kind : "SCALAR",
+          name: m.name,
+          ofType: null,
+        };
+      });
+    }
     list.push(type);
   }
 }
