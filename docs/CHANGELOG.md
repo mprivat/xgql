@@ -1,3 +1,15 @@
+# [1.4.0](https://github.com/mprivat/xgql/compare/v1.3.0...v1.4.0) (2020-09-16)
+
+
+### Bug Fixes
+
+* added missing file ([6440827](https://github.com/mprivat/xgql/commit/64408272475c80c4e9f4615ca954c454a99d2e7c))
+
+
+### Features
+
+* started introspection export ([1ade71b](https://github.com/mprivat/xgql/commit/1ade71b86778d0bfd9f398c35a2940e237a856df))
+
 # [1.3.0](https://github.com/mprivat/xgql/compare/v1.2.1...v1.3.0) (2020-09-15)
 
 
