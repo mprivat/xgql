@@ -14,6 +14,7 @@ program
   .action(function () {
     run(process.argv.slice(2));
   })
+  .option("-j --json", "Outputs the JSON structure", 0)
   .usage("[options] <path> [morePaths ...]")
   .parse(process.argv);
 
@@ -31,8 +32,11 @@ async function run(args) {
 
     try {
       const schema = await fs.readFile(filename, "utf8");
-      parser.feed(schema);
+      const result = parser.feed(schema);
       console.log(`- ${filename}: ${"OK".green}`);
+      if (program.json) {
+        console.log(JSON.stringify(result.results[0], null, 2));
+      }
     } catch (err) {
       errors++;
       let message = err.message;

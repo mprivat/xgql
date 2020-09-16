@@ -8,7 +8,7 @@ let _style = STYLE_DEFAULT;
 function toSDL(obj, style) {
   _style = style;
   const buffer = [];
-  for (let block of obj) {
+  for (const block of obj) {
     switch (block.type) {
       case "SchemaDefinition":
         printSchemaDefinition(buffer, block);
