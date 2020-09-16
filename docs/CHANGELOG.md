@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/mprivat/xgql/compare/v1.5.0...v1.6.0) (2020-09-16)
+
+
+### Features
+
+* added support for unions ([dbb02a9](https://github.com/mprivat/xgql/commit/dbb02a93710e036a25ecdd3792149de1eb89edbd))
+
 # [1.5.0](https://github.com/mprivat/xgql/compare/v1.4.0...v1.5.0) (2020-09-16)
 
 
