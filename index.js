@@ -15,5 +15,9 @@ fs.readFile(`${appHome}/package.json`, "utf8", function (err, data) {
     .description("A GraphQL schema manipulation tool.")
     .command("merge", "Merges multiple graphQL schema files into one")
     .command("syntax", "Syntax validation of the specified schema file(s)")
+    .command(
+      "introspect",
+      "Simulates a basic introspection query of the specified schema file"
+    )
     .parse(process.args);
 });
