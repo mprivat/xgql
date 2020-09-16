@@ -144,7 +144,7 @@ function printType(buffer, type) {
 }
 
 function printDescription(buffer, description, indent) {
-  if (_style == STYLE_APPSYNC) {
+  if (_style === STYLE_APPSYNC) {
     const lines = description.split("\n");
     for (let i in lines) {
       tab(buffer, indent);
@@ -290,7 +290,7 @@ function printEnumTypeDefinition(buffer, enumTypeDefinition) {
 }
 
 function printEnumValue(buffer, value, indent) {
-  if (value.description) {
+  if (value.description && _style !== STYLE_APPSYNC) {
     printDescription(buffer, value.description, indent);
   }
   tab(buffer, indent);
