@@ -178,7 +178,7 @@ type Employee implements Person {
 }
 ```
 
-## Syntax [check](check) a GraphQL schema
+## Syntax check a GraphQL schema
 
 The `syntax` command simply checks that the content of the file is well formatted. It does not try to check that any of the types are valid, etc...
 
@@ -200,7 +200,7 @@ The `syntax` command will exit with code 1 is any error was found, 0 otherwise. 
 
 ## Introspection query
 
-The `introspect` command simulates running a basic introspection query against the schema. It produces a value instrospection JSON from the schema file.
+The `introspect` command simulates running a basic introspection query against the schema. It produces a valid instrospection JSON from the schema file.
 
 ```bash
 xgql introspect schema.graphql
