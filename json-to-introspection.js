@@ -20,15 +20,18 @@ function toIntrospection(obj) {
         break;
       case "InputObjectTypeDefinition":
         inputs.push(block);
+        names[block.name] = "INPUT_OBJECT";
         break;
       case "DirectiveDefinition":
         directives.push(block);
         break;
       case "EnumTypeDefinition":
         enums.push(block);
+        names[block.name] = "ENUM";
         break;
       case "UnionTypeDefinition":
         unions.push(block);
+        names[block.name] = "UNION";
         break;
       case "InterfaceTypeDefinition":
         interfaces.push(block);
@@ -248,8 +251,8 @@ function addUnions(list, unions, names) {
       interfaces: null,
     };
     if (t.members) {
-      const kind = names[t.name];
       t.possibleTypes = t.members.map((m) => {
+        const kind = names[m.name];
         return {
           kind: kind ? kind : "SCALAR",
           name: m.name,
@@ -319,10 +322,11 @@ function createType(type, names, refs) {
     t.name = null;
     t.ofType = createType(type.listOf, names, refs);
   } else {
-    const kind = names[t.name];
-    t.kind = kind ? kind : "SCALAR";
+    const kind = names[type.name];
+    t.kind = kind !== undefined ? kind : "SCALAR";
     t.name = type.name;
-    t.ofType = kind ? refs[t.name] : null;
+    //t.ofType = kind ? refs[type.name] : null;
+    t.ofType = null;
   }
   return result;
 }
