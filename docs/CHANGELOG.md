@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/mprivat/xgql/compare/v1.6.0...v1.6.1) (2020-09-18)
+
+
+### Bug Fixes
+
+* fixed type reference in introspection ([9a0da9f](https://github.com/mprivat/xgql/commit/9a0da9f2099f911eb3d8e9ae44eb861e37b09f69))
+
 # [1.6.0](https://github.com/mprivat/xgql/compare/v1.5.0...v1.6.0) (2020-09-16)
 
 
