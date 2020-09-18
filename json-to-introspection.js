@@ -12,6 +12,9 @@ function toIntrospection(obj) {
 
   let schema;
 
+  const defaultTypes = require("./references/default.json");
+  obj = obj.concat(defaultTypes);
+
   // Sort everything
   for (const block of obj) {
     switch (block.type) {
