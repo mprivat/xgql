@@ -315,7 +315,7 @@ function createType(type, names, refs) {
 
   if (!type.nullable) {
     t = {};
-    result.nullable = "NON_NULL";
+    result.kind = "NON_NULL";
     result.name = null;
     result.ofType = t;
   }
