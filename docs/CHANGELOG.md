@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/mprivat/xgql/compare/v1.7.0...v1.7.1) (2020-12-03)
+
+
+### Bug Fixes
+
+* set kind to NON_NULL in introspection when not nullable ([b6e4651](https://github.com/mprivat/xgql/commit/b6e46516c613cfec543996e06f7a367f28c32242))
+
 # [1.7.0](https://github.com/mprivat/xgql/compare/v1.6.1...v1.7.0) (2020-09-18)
 
 
