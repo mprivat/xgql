@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/mprivat/xgql/compare/v1.7.1...v1.8.0) (2020-12-10)
+
+
+### Features
+
+* fix version ([e939ba9](https://github.com/mprivat/xgql/commit/e939ba9b70bb461fe0fb2f60ad74c982c3c224d7))
+
 ## [1.7.1](https://github.com/mprivat/xgql/compare/v1.7.0...v1.7.1) (2020-12-03)
 
 
