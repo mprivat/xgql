@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/mprivat/xgql/compare/v1.8.0...v1.8.1) (2021-01-15)
+
+
+### Bug Fixes
+
+* fixed single-entry enums ([31e8c66](https://github.com/mprivat/xgql/commit/31e8c66f567864672fc960437123603f2634df68))
+
 # [1.8.0](https://github.com/mprivat/xgql/compare/v1.7.1...v1.8.0) (2020-12-10)
 
 
