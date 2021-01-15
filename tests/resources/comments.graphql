@@ -1,0 +1,9 @@
+# A thing
+type Thing {
+  # Note: this will cause a failure
+
+  # The ID of the thing
+  id: ID!
+
+  # Note: this will also cause a failure
+}

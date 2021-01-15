@@ -406,4 +406,3 @@ Description -> comment Description {% d => d[0] + '\n' + d[1] %}
 comment -> %pound_comment {% d => d[0].value %}
          | %ml_comment {%  d => d[0].value %}
          | %string_literal {% d => d[0].value %}
-
