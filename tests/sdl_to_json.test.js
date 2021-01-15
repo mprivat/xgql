@@ -52,6 +52,22 @@ test("I can parse an input block", async () => {
   expect(actualOutput).toStrictEqual(expectedOutput);
 });
 
+test("I can deal with a single-value enum", async () => {
+  // Parse GraphQL schema
+
+  const schema = await fs.readFile("tests/resources/single-value-enum.graphql", "utf8");
+
+  const parser = new nearley.Parser(
+    nearley.Grammar.fromCompiled(graphqlGrammar)
+  );
+  const parsed = parser.feed(schema);
+  expect(parsed).toBeDefined();
+  expect(parsed.results.length).toBe(1);
+
+  const json = parsed.results[0];
+  expect(json[0].values).toEqual([{value:"A"}]);
+});
+
 async function lookAt(name) {
   const expectedOutput = JSON.parse(
     await fs.readFile(`tests/resources/${name}.json`, "utf8")

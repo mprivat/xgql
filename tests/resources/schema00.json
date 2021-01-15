@@ -1,152 +1,145 @@
 [
-  {
-    "type": "SchemaDefinition",
-    "operations": [
-      { "operation": "query", "type": "Query" },
-      { "operation": "mutation", "type": "Mutation" }
-    ],
-    "directives": [
-      {
-        "name": "someDirective",
-        "arguments": [
-          { "name": "a", "value": 12 },
-          { "name": "bleh", "value": "abcd" }
-        ]
-      }
-    ]
-  },
-  {
-    "type": "InputObjectTypeDefinition",
-    "name": "Point2D",
-    "description": "A description",
-    "fields": [
-      {
-        "name": "x",
-        "type": { "name": "Float", "nullable": true },
-        "defaultValue": 3.56,
-        "directives": [{ "name": "somestuff" }]
-      },
-      {
-        "name": "y",
-        "type": { "name": "Float", "nullable": true },
-        "description": "An argument description"
-      }
-    ]
-  },
-  {
-    "type": "DirectiveDefinition",
-    "name": "cacheControl",
-    "description": "Some directive\non multiple lines",
-    "argumentsDefinition": [
-      {
-        "name": "maxAge",
-        "type": { "name": "Int", "nullable": true },
-        "defaultValue": 3,
-        "directives": [
-          {
-            "name": "somestuff",
-            "arguments": [
-              { "name": "a", "value": 1 },
-              { "name": "b", "value": 2 }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "scope",
-        "type": { "name": "CacheControlScope", "nullable": true },
-        "description": "Da scope"
-      }
-    ],
-    "on": ["FIELD_DEFINITION", "OBJECT", "INTERFACE"]
-  },
-  {
-    "type": "EnumTypeDefinition",
-    "name": "Direction",
-    "values": [
-      { "value": "NORTH" },
-      { "value": "EAST", "description": "This is the east, obviously" },
-      {
-        "value": "SOUTH",
-        "description": "The south is here",
-        "directives": [{ "name": "thedirective" }]
-      },
-      { "value": "WEST" }
-    ]
-  },
-  {
-    "type": "UnionTypeDefinition",
-    "name": "SearchResult",
-    "members": ["Photo", "Person"]
-  },
-  {
-    "type": "InterfaceTypeDefinition",
-    "name": "NamedEntity",
-    "description": "just because",
-    "directives": [{ "name": "somedirective1" }],
-    "fields": [
-      {
-        "name": "name",
-        "type": { "name": "String", "nullable": true },
-        "directives": [{ "name": "adirective" }]
-      }
-    ]
-  },
-  {
-    "type": "ScalarTypeDefinition",
-    "name": "Date",
-    "description": "It's cool",
-    "directives": [{ "name": "somedirective" }]
-  },
-  {
-    "type": "ObjectTypeDefinition",
-    "name": "X",
-    "description": "This is a first thing\nand here is another",
-    "implements": ["A", "B"],
-    "directives": [
-      { "name": "something" },
-      {
-        "name": "other",
-        "arguments": [
-          { "name": "A", "value": true },
-          { "name": "B", "value": "b" },
-          { "name": "C", "value": 3.14 }
-        ]
-      }
-    ],
-    "fields": [
-      { "name": "variable", "type": { "name": "Date", "nullable": false } },
-      {
-        "name": "other",
-        "type": { "name": "Atype", "nullable": true },
-        "description": "other is cool",
-        "argumentsDefinition": [
-          {
-            "name": "xyz",
-            "type": { "name": "String", "nullable": false },
-            "defaultValue": "abc",
-            "directives": [
-              { "name": "test", "arguments": [{ "name": "x", "value": 1 }] }
-            ]
-          },
-          {
-            "name": "ooo",
-            "type": { "name": "Date", "nullable": true },
-            "description": "This is some field"
-          }
-        ]
-      },
-      {
-        "name": "lastThing",
-        "type": {
-          "listOf": {
-            "listOf": { "name": "String", "nullable": false },
-            "nullable": false
-          },
-          "nullable": true
-        }
-      }
-    ]
-  }
+	{
+		"type": "SchemaDefinition",
+		"operations": [ { "operation": "query", "type": "Query" }, { "operation": "mutation", "type": "Mutation" } ],
+		"directives": [
+			{
+				"name": "someDirective",
+				"arguments": [ { "name": "a", "value": 12 }, { "name": "bleh", "value": "abcd" } ]
+			}
+		]
+	},
+	{
+		"type": "InputObjectTypeDefinition",
+		"name": "Point2D",
+		"description": "A description",
+		"fields": [
+			{
+				"name": "x",
+				"type": { "name": "Float", "nullable": true },
+				"defaultValue": 3.56,
+				"directives": [ { "name": "somestuff" } ]
+			},
+			{
+				"name": "y",
+				"type": { "name": "Float", "nullable": true },
+				"description": "An argument description"
+			}
+		]
+	},
+	{
+		"type": "DirectiveDefinition",
+		"name": "cacheControl",
+		"description": "Some directive\non multiple lines",
+		"argumentsDefinition": [
+			{
+				"name": "maxAge",
+				"type": { "name": "Int", "nullable": true },
+				"defaultValue": 3,
+				"directives": [
+					{
+						"name": "somestuff",
+						"arguments": [ { "name": "a", "value": 1 }, { "name": "b", "value": 2 } ]
+					}
+				]
+			},
+			{
+				"name": "scope",
+				"type": { "name": "CacheControlScope", "nullable": true },
+				"description": "Da scope"
+			}
+		],
+		"on": [ "FIELD_DEFINITION", "OBJECT", "INTERFACE" ]
+	},
+	{
+		"type": "EnumTypeDefinition",
+		"name": "Direction",
+		"values": [
+			{ "value": "NORTH" },
+			{ "value": "EAST", "description": "This is the east, obviously" },
+			{
+				"value": "SOUTH",
+				"description": "The south is here",
+				"directives": [ { "name": "thedirective" } ]
+			},
+			{ "value": "WEST" }
+		]
+	},
+	{
+		"type": "EnumTypeDefinition",
+		"name": "SingleItem",
+		"values": [ { "value": "X", "description": "The X" } ]
+	},
+	{
+		"type": "UnionTypeDefinition",
+		"name": "SearchResult",
+		"members": [ "Photo", "Person" ]
+	},
+	{
+		"type": "InterfaceTypeDefinition",
+		"name": "NamedEntity",
+		"description": "just because",
+		"directives": [ { "name": "somedirective1" } ],
+		"fields": [
+			{
+				"name": "name",
+				"type": { "name": "String", "nullable": true },
+				"directives": [ { "name": "adirective" } ]
+			}
+		]
+	},
+	{
+		"type": "ScalarTypeDefinition",
+		"name": "Date",
+		"description": "It's cool",
+		"directives": [ { "name": "somedirective" } ]
+	},
+	{
+		"type": "ObjectTypeDefinition",
+		"name": "X",
+		"description": "This is a first thing\nand here is another",
+		"implements": [ "A", "B" ],
+		"directives": [
+			{ "name": "something" },
+			{
+				"name": "other",
+				"arguments": [
+					{ "name": "A", "value": true },
+					{ "name": "B", "value": "b" },
+					{ "name": "C", "value": 3.14 }
+				]
+			}
+		],
+		"fields": [
+			{ "name": "variable", "type": { "name": "Date", "nullable": false } },
+			{
+				"name": "other",
+				"type": { "name": "Atype", "nullable": true },
+				"description": "other is cool",
+				"argumentsDefinition": [
+					{
+						"name": "xyz",
+						"type": { "name": "String", "nullable": false },
+						"defaultValue": "abc",
+						"directives": [ { "name": "test", "arguments": [ { "name": "x", "value": 1 } ] } ]
+					},
+					{
+						"name": "ooo",
+						"type": { "name": "Date", "nullable": true },
+						"description": "This is some field"
+					}
+				]
+			},
+			{
+				"name": "lastThing",
+				"type": {
+					"listOf": {
+						"listOf": { "name": "String", "nullable": false },
+						"nullable": false
+					},
+					"nullable": true
+				}
+			}
+		]
+	}
 ]
-

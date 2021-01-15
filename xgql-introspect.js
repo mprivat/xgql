@@ -35,6 +35,7 @@ async function run(args) {
   try {
     const schema = await fs.readFile(filename, "utf8");
     const parsed = parser.feed(schema);
+
     const result = JSON.stringify(toIntrospection(parsed.results[0]), null, 2);
     if (program.output) {
       await fs.writeFile(program.output, result, "utf8");

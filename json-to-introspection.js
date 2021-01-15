@@ -64,6 +64,10 @@ function toIntrospection(obj) {
     scalars,
   };
 
+  if(!schema) {
+    schema = {};
+  }
+
   return compose(schema, members, names, refs);
 }
 

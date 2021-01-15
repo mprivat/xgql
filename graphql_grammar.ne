@@ -59,7 +59,7 @@ let lexer = moo.states({
         string_literal: {
             match: /"(?:[^\n\\"]|\\["\\ntbfr])*"/,
             value: s => JSON.parse(s)
-        },    
+        },
         ktrue: "true",
         kfalse: "false",
         name: {
@@ -91,7 +91,7 @@ let lexer = moo.states({
 
 # https://spec.graphql.org/June2018/#sec-Language.Document
 Document -> _ml Definitions {% d => d[1] %}
-        
+
 Definitions -> Definition Definitions {% d => d[1].concat([d[0]]) %}
              | Definition {% d => [d[0]] %}
 
@@ -262,7 +262,7 @@ InputFieldsDefinition -> %lbrace _ml InputValueDefinition:? %rbrace _ml {% d => 
 EnumValuesDefinition -> %lbrace _ml EnumValueDefinitions %rbrace _ml {% d => d[2] %}
 
 EnumValueDefinitions -> EnumValueDefinition EnumValueDefinitions {% d => [d[0]].concat(d[1]) %}
-                      | EnumValueDefinition {% d => d[0] %}
+                      | EnumValueDefinition {% d => [d[0]] %}
 
 EnumValueDefinition -> Description:? EnumValue Directives:?
                         {%

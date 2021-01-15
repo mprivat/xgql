@@ -39,6 +39,13 @@ enum Direction {
     WEST
 }
 
+enum SingleItem {
+    """
+    The X
+    """
+    X
+}
+
 union SearchResult = Photo | Person
 
 """

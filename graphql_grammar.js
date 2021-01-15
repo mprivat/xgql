@@ -60,7 +60,7 @@ let lexer = moo.states({
         string_literal: {
             match: /"(?:[^\n\\"]|\\["\\ntbfr])*"/,
             value: s => JSON.parse(s)
-        },    
+        },
         ktrue: "true",
         kfalse: "false",
         name: {
@@ -276,7 +276,7 @@ var grammar = {
     {"name": "InputFieldsDefinition", "symbols": [(lexer.has("lbrace") ? {type: "lbrace"} : lbrace), "_ml", "InputFieldsDefinition$ebnf$1", (lexer.has("rbrace") ? {type: "rbrace"} : rbrace), "_ml"], "postprocess": d => d[2]},
     {"name": "EnumValuesDefinition", "symbols": [(lexer.has("lbrace") ? {type: "lbrace"} : lbrace), "_ml", "EnumValueDefinitions", (lexer.has("rbrace") ? {type: "rbrace"} : rbrace), "_ml"], "postprocess": d => d[2]},
     {"name": "EnumValueDefinitions", "symbols": ["EnumValueDefinition", "EnumValueDefinitions"], "postprocess": d => [d[0]].concat(d[1])},
-    {"name": "EnumValueDefinitions", "symbols": ["EnumValueDefinition"], "postprocess": d => d[0]},
+    {"name": "EnumValueDefinitions", "symbols": ["EnumValueDefinition"], "postprocess": d => [d[0]]},
     {"name": "EnumValueDefinition$ebnf$1", "symbols": ["Description"], "postprocess": id},
     {"name": "EnumValueDefinition$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
     {"name": "EnumValueDefinition$ebnf$2", "symbols": ["Directives"], "postprocess": id},

@@ -1,0 +1,8 @@
+[
+	{
+		"type": "ObjectTypeDefinition",
+		"name": "Test",
+		"description": "A",
+		"fields": [ { "name": "id", "type": { "name": "String", "nullable": false }, "description": "S" } ]
+	}
+]

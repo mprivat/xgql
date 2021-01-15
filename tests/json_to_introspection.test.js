@@ -7,8 +7,7 @@ test("I can convert JSON to introspection JSON", async () => {
   );
 
   const introspection = toIntrospection(json);
-
-  console.log(JSON.stringify(introspection, null, 2));
+  expect(introspection).toBeDefined()
 });
 
 test("I set kind to NON-NULL when not nullable", async () => {
@@ -20,4 +19,13 @@ test("I set kind to NON-NULL when not nullable", async () => {
   expect(introspection.data.__schema.types[0].fields[0].type.kind).toBe(
     "NON_NULL"
   );
+});
+
+test("I can convert a basic JSON file to introspection JSON", async () => {
+  const json = JSON.parse(
+    await fs.readFile("tests/resources/simple.json", "utf8")
+  );
+
+  const introspection = toIntrospection(json);
+  expect(introspection.data["__schema"]).toBeDefined()
 });

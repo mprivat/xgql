@@ -1,0 +1,5 @@
+# A
+type Test {
+ # S
+ id: String!
+}
