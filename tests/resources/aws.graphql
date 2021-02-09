@@ -1,0 +1,36 @@
+type Mutation {
+	upsertSomeRequest(input: SomeRequestInput): SomePayload
+	upsertSomeResponse(input: SomeResponseInput): SomePayload
+        @aws_iam @aws_api_key
+}
+
+type SomePayload @aws_iam @aws_api_key {
+	id: ID!
+	name: String
+	clientMutationId: String
+}
+
+input SomeRequestInput {
+	clientMutationId: String
+}
+
+input SomeResponseInput {
+	id: ID!
+	name: String
+	clientMutationId: String
+}
+
+type Query {
+	hello: String!
+}
+
+type Subscription {
+	subscribeToSomeResponse(clientMutationId: String!): SomePayload
+		@aws_subscribe(mutations: ["upsertSomeResponse"])
+}
+
+schema {
+	query: Query
+	mutation: Mutation
+	subscription: Subscription
+}

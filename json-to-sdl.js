@@ -233,6 +233,12 @@ function printFieldDefinition(buffer, fieldDefinition, indent) {
   print(buffer, ": ");
   printType(buffer, fieldDefinition.type);
   println(buffer, "");
+  if (fieldDefinition.directives) {
+    for (let directive of fieldDefinition.directives) {
+      printDirective(buffer, directive);
+    }
+    println(buffer, "");
+  }
 }
 
 function printInterfaceTypeDefinition(buffer, interfaceTypeDefinition) {

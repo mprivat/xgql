@@ -356,6 +356,7 @@ var grammar = {
             const r = {
                 "name": d[1].value
             };
+        
             if(d[3]) r.arguments = d[3];
             return r;
         }
@@ -401,6 +402,9 @@ var grammar = {
     {"name": "Value", "symbols": [(lexer.has("string_literal") ? {type: "string_literal"} : string_literal)], "postprocess": d => d[0].value},
     {"name": "Value", "symbols": [(lexer.has("ktrue") ? {type: "ktrue"} : ktrue)], "postprocess": d => true},
     {"name": "Value", "symbols": [(lexer.has("kfalse") ? {type: "kfalse"} : kfalse)], "postprocess": d => false},
+    {"name": "Value", "symbols": [(lexer.has("lbracket") ? {type: "lbracket"} : lbracket), "ListOfValues", (lexer.has("rbracket") ? {type: "rbracket"} : rbracket)], "postprocess": d => d[1]},
+    {"name": "ListOfValues", "symbols": ["Value", "ListOfValues"], "postprocess": d => [d[0]].concat(d[1])},
+    {"name": "ListOfValues", "symbols": ["Value"], "postprocess": d => [d[0]]},
     {"name": "_ml$ebnf$1", "symbols": []},
     {"name": "_ml$ebnf$1", "symbols": ["_ml$ebnf$1", "multi_line_ws_char"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "_ml", "symbols": ["_ml$ebnf$1"]},

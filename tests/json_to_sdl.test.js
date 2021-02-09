@@ -68,3 +68,25 @@ test("I can reverse JSON back to SDL with appsync comments", async () => {
     )
   ).toBe(true);
 });
+
+test("I can reverse AWS-annotated JSON back to SDL", async () => {
+  const json = JSON.parse(
+    await fs.readFile("tests/resources/aws.json", "utf8")
+  );
+  const result = toSDL(json, 0);
+
+  // Make sure the output is valid
+  const parser = new nearley.Parser(
+    nearley.Grammar.fromCompiled(graphqlGrammar)
+  );
+  const parsed = parser.feed(result);
+  expect(parsed.results.length).toBe(1);
+
+  expect(
+    result.includes(await fs.readFile("tests/resources/aws-mutation-gen.sdl", "utf8"))
+  ).toBe(true);
+
+  expect(
+    result.includes(await fs.readFile("tests/resources/aws-subscription-gen.sdl", "utf8"))
+  ).toBe(true);
+});

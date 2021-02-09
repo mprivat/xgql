@@ -1,0 +1,9 @@
+type Mutation {
+    upsertSomeRequest(
+        input: SomeRequestInput
+    ): SomePayload
+    upsertSomeResponse(
+        input: SomeResponseInput
+    ): SomePayload
+ @aws_iam @aws_api_key
+}

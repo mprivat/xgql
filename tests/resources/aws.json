@@ -1,0 +1,186 @@
+[
+	{
+		"type": "SchemaDefinition",
+		"operations": [
+			{
+				"operation": "query",
+				"type": "Query"
+			},
+			{
+				"operation": "mutation",
+				"type": "Mutation"
+			},
+			{
+				"operation": "subscription",
+				"type": "Subscription"
+			}
+		]
+	},
+	{
+		"type": "ObjectTypeDefinition",
+		"name": "Subscription",
+		"fields": [
+			{
+				"name": "subscribeToSomeResponse",
+				"type": {
+					"name": "SomePayload",
+					"nullable": true
+				},
+				"argumentsDefinition": [
+					{
+						"name": "clientMutationId",
+						"type": {
+							"name": "String",
+							"nullable": false
+						}
+					}
+				],
+				"directives": [
+					{
+						"name": "aws_subscribe",
+						"arguments": [
+							{
+								"name": "mutations",
+								"value": [ "upsertSomeResponse" ]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	{
+		"type": "ObjectTypeDefinition",
+		"name": "Query",
+		"fields": [
+			{
+				"name": "hello",
+				"type": {
+					"name": "String",
+					"nullable": false
+				}
+			}
+		]
+	},
+	{
+		"type": "InputObjectTypeDefinition",
+		"name": "SomeResponseInput",
+		"fields": [
+			{
+				"name": "id",
+				"type": {
+					"name": "ID",
+					"nullable": false
+				}
+			},
+			{
+				"name": "name",
+				"type": {
+					"name": "String",
+					"nullable": true
+				}
+			},
+			{
+				"name": "clientMutationId",
+				"type": {
+					"name": "String",
+					"nullable": true
+				}
+			}
+		]
+	},
+	{
+		"type": "InputObjectTypeDefinition",
+		"name": "SomeRequestInput",
+		"fields": [
+			{
+				"name": "clientMutationId",
+				"type": {
+					"name": "String",
+					"nullable": true
+				}
+			}
+		]
+	},
+	{
+		"type": "ObjectTypeDefinition",
+		"name": "SomePayload",
+		"directives": [
+			{
+				"name": "aws_iam"
+			},
+			{
+				"name": "aws_api_key"
+			}
+		],
+		"fields": [
+			{
+				"name": "id",
+				"type": {
+					"name": "ID",
+					"nullable": false
+				}
+			},
+			{
+				"name": "name",
+				"type": {
+					"name": "String",
+					"nullable": true
+				}
+			},
+			{
+				"name": "clientMutationId",
+				"type": {
+					"name": "String",
+					"nullable": true
+				}
+			}
+		]
+	},
+	{
+		"type": "ObjectTypeDefinition",
+		"name": "Mutation",
+		"fields": [
+			{
+				"name": "upsertSomeRequest",
+				"type": {
+					"name": "SomePayload",
+					"nullable": true
+				},
+				"argumentsDefinition": [
+					{
+						"name": "input",
+						"type": {
+							"name": "SomeRequestInput",
+							"nullable": true
+						}
+					}
+				]
+			},
+			{
+				"name": "upsertSomeResponse",
+				"type": {
+					"name": "SomePayload",
+					"nullable": true
+				},
+				"argumentsDefinition": [
+					{
+						"name": "input",
+						"type": {
+							"name": "SomeResponseInput",
+							"nullable": true
+						}
+					}
+				],
+				"directives": [
+					{
+						"name": "aws_iam"
+					},
+					{
+						"name": "aws_api_key"
+					}
+				]
+			}
+		]
+	}
+]

@@ -12,6 +12,16 @@ test("I can parse a complete graphQL schema without ambiguity", async () => {
   expect(parsed.results.length).toBe(1);
 });
 
+test("I can parse an AWS graphQL schema without ambiguity", async () => {
+  const schema = await fs.readFile("tests/resources/aws.graphql", "utf8");
+
+  const parser = new nearley.Parser(
+    nearley.Grammar.fromCompiled(graphqlGrammar)
+  );
+  const parsed = parser.feed(schema);
+  expect(parsed.results.length).toBe(1);
+});
+
 test("I can parse a type block", async () => {
   const { expectedOutput, actualOutput } = await lookAt("type");
   expect(actualOutput).toStrictEqual(expectedOutput);

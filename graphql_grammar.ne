@@ -344,6 +344,7 @@ Directive -> %at %name _ml Arguments:?
                     const r = {
                         "name": d[1].value
                     };
+
                     if(d[3]) r.arguments = d[3];
                     return r;
                 }
@@ -389,6 +390,11 @@ Value -> %number_literal {% d => d[0].value %}
        | %string_literal {% d => d[0].value %}
        | %ktrue {% d => true %}
        | %kfalse {% d => false %}
+       | %lbracket ListOfValues %rbracket {% d => d[1] %}
+
+ListOfValues -> Value ListOfValues {% d => [d[0]].concat(d[1]) %}
+              | Value {% d => [d[0]] %}
+
 
 _ml -> multi_line_ws_char:*
 

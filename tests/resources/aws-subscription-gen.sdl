@@ -1,0 +1,6 @@
+type Subscription {
+    subscribeToSomeResponse(
+        clientMutationId: String!
+    ): SomePayload
+ @aws_subscribe(mutations: ["upsertSomeResponse"])
+}
