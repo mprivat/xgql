@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/mprivat/xgql/compare/v1.8.1...v1.9.0) (2021-01-15)
+
+
+### Features
+
+* fixed schemaless introspection ([7d42985](https://github.com/mprivat/xgql/commit/7d429854cc2964e62994c455987a83d24af4352b))
+
 ## [1.8.1](https://github.com/mprivat/xgql/compare/v1.8.0...v1.8.1) (2021-01-15)
 
 
