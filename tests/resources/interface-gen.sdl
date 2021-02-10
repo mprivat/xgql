@@ -3,5 +3,5 @@ just because
 """
 interface NamedEntity @somedirective1 {
     name: String
+ @adirective
 }
-
