@@ -1,3 +1,10 @@
+## [1.9.3](https://github.com/mprivat/xgql/compare/v1.9.2...v1.9.3) (2021-02-10)
+
+
+### Bug Fixes
+
+* fixed broken unit test ([2043197](https://github.com/mprivat/xgql/commit/20431972dcc5c63d95065eaf6bcabacd3600317f))
+
 # [1.9.0](https://github.com/mprivat/xgql/compare/v1.8.1...v1.9.0) (2021-01-15)
 
 
